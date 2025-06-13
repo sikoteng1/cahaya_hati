@@ -1,0 +1,96 @@
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 177.78%; /* Nah, ini untuk rasio 9:16 */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ukuran medium ke atas */
+    @media (min-width: 768px) {
+      .video-item {
+        /* Kembali ke tampilan grid 2x2 atau 4 kolom */
+        width: auto !important; /* pentiiing! */
+        flex-shrink: 1 !important; /* pentiiing! */
+        scroll-snap-align: unset !important; /* pentiiing! */
+      }
+      .mobile-slider-wrapper {
+        display: grid; /* untuk desktop kembali jadi grid */
+        grid-template-columns: repeat(4, 1fr); /* atau 2, 1fr kalau mau 2 kolom */
+        overflow-x: visible; /* tidak ada scrollbar di desktop */
+        scroll-snap-type: none; /* matikan snap di desktop */
+      }
+    }
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 177.78%; /* Nah, ini untuk rasio 9:16 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Ini CSS Tambahan Kina untuk Mobile Slider! --- */
+@media (max-width: 767px) { /* Ini buat tampilan layar kecil (mobile) */
+  .grid {
+    display: block; /* Matikan grid bawaan kalau di mobile */
+  }
+
+  .mobile-slider-wrapper {
+    display: contents; /* Biar elemen dalamnya tetap ikut grid induk */
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+  
+  .mobile-slider-wrapper {
+    display: flex; /* Bikin video berjejer horizontal */
+    overflow-x: scroll; /* Izinkan digeser secara horizontal */
+    scroll-snap-type: x mandatory; /* Bikin video nempel pas digeser */
+    -webkit-overflow-scrolling: touch; /* Biar smooth di iOS */
+    scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+  }
+
+  /* Buat sembunyiin scrollbar di Chrome/Safari */
+  .mobile-slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .video-item {
+    flex-shrink: 0; /* Penting! Jangan biarkan video mengecil */
+    width: 100%; /* Setiap video ambil lebar penuh layar mobile */
+    scroll-snap-align: start; /* Pastikan video nempel di awal saat digeser */
+    margin-right: 0; /* Hapus margin di antara item jika ada */
+  }
+}
+
+@media (min-width: 768px) { /* Ukuran medium ke atas, kembali ke tampilan awal Player */
+  .grid {
+    display: grid; /* Aktifkan lagi grid di desktop */
+    grid-template-columns: repeat(4, 1fr); /* Sesuaikan dengan keinginan Player */
+    gap: 0px; /* Jarak antar kolom di desktop */
+  }
+  .video-item {
+    width: auto; /* Biar video menyesuaikan ukuran grid */
+    flex-shrink: 1; /* Biar bisa mengecil lagi sesuai grid */
+    scroll-snap-align: unset;
+  }
+}
+
+  
